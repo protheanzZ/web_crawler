@@ -7,24 +7,6 @@ headers = {
                   '(KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36'
 }
 
-'''
-def get_info(url):
-    wb_data = requests.get(url, headers=headers)
-    soup = BeautifulSoup(wb_data.text, 'lxml')
-    ranks = soup.select('span.pc_temp_num')
-    titles = soup.select('div.pc_temp_songlist > ul > li > a')
-    times = soup.select('span.pc_temp_tips_r > span')
-    for rank, title, time in zip(ranks, titles, times):
-        data = {
-            'rank': rank.get_text().strip(),
-            'singer': title.get_text().split('-')[0],
-            'song': title.get_text().split('-')[1],
-
-            'time': time.get_text().strip()
-        }
-
-        print(data)
-'''
 
 def get_info(url):
     wb_data = requests.get(url, headers=headers)
