@@ -19,4 +19,3 @@ def judgment_sex(class_name):
 def get_info(url):
     res = requests.get(url, headers=headers)
     ids = re.findall('<h2>(.*?)</h2>', res.text, re.S)
-    
