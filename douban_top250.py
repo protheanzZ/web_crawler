@@ -26,6 +26,7 @@ for url in urls:
         publisher = book_infos.split('/')[-3]
         date = book_infos.split('/')[-2]
         price = book_infos.split('/')[-1]
+        price = price if price.endswith('元') else price+'元'
         rate = info.xpath('td/div/span[2]/text()')[0]
         comments = info.xpath('td/p/span/text()')
         comment = comments[0] if len(comments) != 0 else '空'
