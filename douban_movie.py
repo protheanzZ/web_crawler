@@ -50,7 +50,5 @@ if __name__ == '__main__':
     urls = ['http://movie.douban.com/top250?start={}'.format(str(i)) for i in range(0, 250, 25)]
     for url in urls:
         get_movie_url(url)
-        sleeptime = numpy.random.rand()*10
-        print(sleeptime)
-        time.sleep(sleeptime)
+        time.sleep(numpy.random.rand()*10)
     conn.commit()
