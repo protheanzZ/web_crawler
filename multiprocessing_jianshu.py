@@ -18,15 +18,22 @@ codes = {}
 
 def get_jianshu_info(url):
     html = requests.get(url, headers=headers)
-
+    print(html.status_code)
+    print(dir(html), '\n', '------------------------------')
+    print(html.text)
     selector = etree.HTML(html.text)
-    infos = selector.xpath('//ul[@class="note-list"]/li')
+    #(selector.text)
+    #print(selector, 'selector')
+    #print(dir(selector))
+    infos = selector.xpath('//li')
+    #print('infos', infos[0].text)
     code = re.findall('.*?page=(.*?)$', url)[0]
-    if code not in codes:
+    '''if code not in codes:
         print(code)
         codes[code] = 1
     else:
-        codes[code] += 1
+        codes[code] += 1'''
+    count = 0
     for info in infos:
         try:
             author = info.xpath('div/div/a/text()')[0]
@@ -43,11 +50,18 @@ def get_jianshu_info(url):
                 'like': like
             }
             jianshu_homepage.insert_one(data)
+            count += 1
+            print('author', author)
         except IndexError:
-            pass
+            print(str(code), 'error occur')
+            return code
+    print(str(code), count)
 
 
+get_jianshu_info('https://www.jianshu.com/c/bDHhpK?order_by=added_at&page=1046')
+'''
 if __name__ == '__main__':
-    urls = ['https://www.jianshu.com/c/bDHhpK?order_by=added_at&page={}'.format(str(i)) for i in range(1, 10001)]
+    urls = ['https://www.jianshu.com/c/bDHhpK?order_by=added_at&page={}'.format(str(i)) for i in range(1, 10001, 1)]
     pool = Pool(processes=12)
-    pool.map(get_jianshu_info, urls)
+    pool.map(get_jianshu_info, urls)'''
+

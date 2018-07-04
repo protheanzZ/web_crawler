@@ -11,6 +11,7 @@ headers = {
 
 f = open('doupo.txt', 'a+')
 
+
 def get_info(url):
     res = requests.get(url, headers=headers)
     if res.status_code == 200:
@@ -26,10 +27,13 @@ def get_info(url):
 
 
 if __name__ == '__main__':
+    done = 1
     urls = ['http://www.doupoxs.com/doupocangqiong/%s.html' % i for i in range(2, 1665)]
     for url in urls:
         get_info(url)
         time.sleep(1)
+        print('done!',done)
+        done += 1
 
 f.close()
 
