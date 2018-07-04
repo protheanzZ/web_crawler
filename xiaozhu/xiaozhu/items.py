@@ -17,4 +17,5 @@ class XiaozhuItem(scrapy.Item):
     lease_type = scrapy.Field()
     suggestion = scrapy.Field()
     bed = scrapy.Field()
+    pass
 
